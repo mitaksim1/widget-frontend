@@ -7,6 +7,7 @@ import thoughtImageUrl from '../../assets/Thought.svg';
 import { useState } from "react";
 import { FeedbackTypeStep } from "./Steps/FeedbackTypeStep";
 import { FeedbackContentStep } from "./Steps/FeedbackContentStep";
+import { FeedbackSuccessStep } from "./Steps/FeedbackSuccessStep";
 
 // Pour la scalabilité, on va créer un array avec tous les types de feedback disponibles, ainsi si un jour on veut ajouter ou supprimer ds feedbacks on n'aura qu'à le faire ici
 export const feedbackTypes = {
@@ -39,23 +40,34 @@ export type FeedbackType = keyof typeof feedbackTypes;
 export function WidgetForm() {
     // Stocke le type de feedback
     const [feedbackType, setFeedbackType] = useState<FeedbackType | null>(null);
+    // Stocke si un feedback a été envoyé
+    const [feedbackSent, setFeedbackSent] = useState(false);
 
-    // Reviens en arrière au clique sur l'icône
     function handleRestartFeedback() {
+        setFeedbackSent(false);
+        // Reviens en arrière au clique sur l'icône
         setFeedbackType(null);
     }
     
     return (
         // w-[calc(100vw-2rem)] md:w-auto : aide à la responsivité de la page, si taille de l'écran à partir de médium laisser la taille auto sinon laisser une marge de 2rem
         <div className="bg-zinc-900 p-4 relative rounded-2xl mb-4 flex flex-col items-center shadow-lg w-[calc(100vw-2rem)] md:w-auto">
-            {!feedbackType ? (
-                    <FeedbackTypeStep onFeedbackTypeChanged={setFeedbackType} />
-                ) : (
-                    <FeedbackContentStep 
-                        feedbackType={feedbackType} 
-                        onFeedbackRestartRequested={handleRestartFeedback}
-                    />   
-                )}
+            {/* Si feedback envoyé montrer page succès, sinon montrer la page avec tous les "processus" */}
+           { feedbackSent ? (
+               <FeedbackSuccessStep onFeedbackRestartRequested={handleRestartFeedback}/>
+           ) : [
+               <>
+                   {!feedbackType ? (
+                       <FeedbackTypeStep onFeedbackTypeChanged={setFeedbackType} />
+                   ) : (
+                       <FeedbackContentStep
+                           feedbackType={feedbackType}
+                           onFeedbackRestartRequested={handleRestartFeedback}
+                           onFeedbackSent={() => setFeedbackSent(true)}
+                       />
+                   )}
+               </>
+           ]}
 
             <footer className="text-xs text-neutral-400">
                 Fait par <a className="underline underline-offset-2" href="https://rocketseat.com.br">Rocketseat</a>

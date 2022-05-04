@@ -8,11 +8,13 @@ interface FeedbackContentStepProps {
     feedbackType: FeedbackType;
     // Pas de paramètre et ne retoune rien
     onFeedbackRestartRequested: () => void;
+    onFeedbackSent: () => void;
 }
 
 export function FeedbackContentStep({ 
     feedbackType, 
-    onFeedbackRestartRequested 
+    onFeedbackRestartRequested ,
+    onFeedbackSent
 }: FeedbackContentStepProps) {
     // Stoke le screenshot pris par l'utilisateur
     const [screenshot, setScreenshot] = useState<string | null>(null);
@@ -29,6 +31,7 @@ export function FeedbackContentStep({
             screenshot, 
             comment
         })
+        onFeedbackSent();
     }
     return (
         <>
