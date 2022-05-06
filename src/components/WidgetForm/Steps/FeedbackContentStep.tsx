@@ -1,7 +1,9 @@
 import { ArrowLeft } from "phosphor-react";
 import { FormEvent, useState } from "react";
 import { FeedbackType, feedbackTypes } from "..";
+import { api } from "../../../lib/api";
 import { CloseButton } from "../../CloseButton";
+import { Loading } from "../../Loading";
 import { ScreenshotButton } from "../ScreenshotButton";
 
 interface FeedbackContentStepProps {
@@ -16,21 +18,33 @@ export function FeedbackContentStep({
     onFeedbackRestartRequested ,
     onFeedbackSent
 }: FeedbackContentStepProps) {
+
     // Stoke le screenshot pris par l'utilisateur
     const [screenshot, setScreenshot] = useState<string | null>(null);
-
     // Récupère le message envoyé par l'utilisateur
     const [comment, setComment] = useState('');
+    // Loading lors de l'envoi du message
+    const [isSendingFeedback, setIsSendingFeedback] = useState(false);
 
     // Récupère juste le feedback choisi par l'utilisateur
     const feedbackTypeInfo = feedbackTypes[feedbackType];
 
-    function handleSubmitFeedback(event: FormEvent) {
+    async function handleSubmitFeedback(event: FormEvent) {
         event.preventDefault();
-        console.log({
-            screenshot, 
-            comment
-        })
+
+        // Au début de la requête, loading is true
+        setIsSendingFeedback(true);
+        
+        // Soumet les données vers le backend
+        await api.post('/feedbacks', {
+            type: feedbackType,
+            comment,
+            screenshot,
+        });
+
+        // Au la fin de la requête, remettre le loading à false
+        setIsSendingFeedback(false);
+
         onFeedbackSent();
     }
     return (
@@ -44,6 +58,7 @@ export function FeedbackContentStep({
                 >
                     <ArrowLeft weight="bold" className="w-4 h-4"/>
                 </button>
+
                 {/* Récupère juste le titre du feedback */}
                 <span className="text-xl leading-6 flex items-center gap-2">
                     <img src={feedbackTypeInfo.image.source} alt={feedbackTypeInfo.image.alt} className="w-6 h-6" />
@@ -67,9 +82,9 @@ export function FeedbackContentStep({
                     <button
                         type="submit"
                         className="p-2 bg-brand-500 rounded-md border-transparent flex-1 flex justify-center items-center text-sm hover:bg-brand-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-zinc-900 focus:ring-brand-500 transition-colors disabled:opacity-50 disabled:hover:bg-brand-500"
-                        disabled={comment.length === 0}
+                        disabled={comment.length === 0 || isSendingFeedback}
                     >
-                        Envoyer feedback
+                        {isSendingFeedback ? <Loading /> : 'Envoyer feedback'}
                     </button>
                 </footer>
             </form>

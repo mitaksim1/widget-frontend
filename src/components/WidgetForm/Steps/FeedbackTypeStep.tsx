@@ -1,7 +1,7 @@
 import { FeedbackType, feedbackTypes } from "..";
 import { CloseButton } from "../../CloseButton";
 
-// Pour que ce composant puiisse recevoir les props, on doit préciser quel type est attendu
+// Pour que ce composant puisse recevoir les props, on doit préciser quel type est attendu
 interface FeedbackTypeProps {
     onFeedbackTypeChanged: (type: FeedbackType) => void;
 }
