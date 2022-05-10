@@ -70,7 +70,7 @@ export function WidgetForm() {
            ]}
 
             <footer className="text-xs text-neutral-400">
-                Fait par <a className="underline underline-offset-2" href="https://rocketseat.com.br">Rocketseat</a>
+                Fait par <a className="underline underline-offset-2" href="https://github.com/mitaksim1">Miriam</a>
             </footer>
         </div>
     );
