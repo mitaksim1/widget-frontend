@@ -7,9 +7,9 @@
     <a href="#license">License</a>
 </p>
 
-
-https://user-images.githubusercontent.com/53954134/167702528-ab66b05e-2086-4aa7-a7b4-94eaf9b880cb.mp4
-
+<h2>
+    <img src="src/assets/widget.gif">
+</h2>
 
 ***
 
