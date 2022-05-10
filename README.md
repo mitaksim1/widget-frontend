@@ -7,6 +7,10 @@
     <a href="#license">License</a>
 </p>
 
+
+https://user-images.githubusercontent.com/53954134/167702528-ab66b05e-2086-4aa7-a7b4-94eaf9b880cb.mp4
+
+
 ***
 
 ## Projet
@@ -14,6 +18,8 @@
 ***
 
 Création d'un widget à intégrer dans une application, dans le but d'avoir des feedbacks des utilisateurs sur les problèmes rencontrés dans l'appli, des idées pour l'améliorer ou tout autre chose.
+
+Si feedback concerne un problème rencontré, possibilité de faire une capture d'écran de la page.
 
 
 ***
@@ -40,7 +46,7 @@ npm run dev
 - [React](https://reactjs.org/)
 - [Vite](https://vitejs.dev/)
 - [Typescript](https://www.typescriptlang.org/)
-- [tailwindCSS](https://tailwindcss.com/)
+- [TailwindCSS](https://tailwindcss.com/)
 - [html2canvas](https://html2canvas.hertzen.com/)
 
 ***
