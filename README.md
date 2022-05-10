@@ -51,5 +51,13 @@ npm run dev
 
 ***
 
+## Deploy 
+
+<h3 align="center"> 
+	🚧  Déploiment 🚀 WIP  🚧
+</h3>
+
+***
+
 ## License
 [MIT License](https://opensource.org/licenses/MIT)
