@@ -21,6 +21,8 @@ Création d'un widget à intégrer dans une application, dans le but d'avoir des
 
 Si feedback concerne un problème rencontré, possibilité de faire une capture d'écran de la page.
 
+Projet crée lors du bootcamp NLW Return de [Rocketseat](https://www.rocketseat.com.br/).
+
 
 ***
 
